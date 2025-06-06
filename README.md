@@ -45,22 +45,24 @@ In this exercise, you will practice using pytest to test a simple command-line c
 
    ```python
    import calculator
+   import runpy # we need this to run main module as a scripts 
 
    def test_add():
        assert calculator.calculate(2, 3, "add") == 5
 
    # Add more functional tests for subtract, multiply, and divide
 
-   def test_terminal_output(capsys):
-       calculator.calculate(10, 2, "multiply")
+   def test_terminal_output(capsys, monkeypatch):
+       monkeypatch.setattr("sys.argv", ["calculator.py", "10", "2", "multiply"])
+       runpy.run_module("calculator", run_name="__main__")
        captured = capsys.readouterr()
-       assert captured.out == "Result: 20\n"
+       assert captured.out == "Result: 20.0\n"
 
    def test_argument_passing(monkeypatch):
-       monkeypatch.setattr("sys.argv", ["calculator.py", "6", "2", "divide"])
+       monkeypatch.setattr("sys.argv", ["calculator.py", "6", "2", "divide"]) # Extra Credit: This line currently doesn't do anything can we fix it?
        assert calculator.calculate(6, 2, "divide") == 3.0
 
-   # Add more tests to cover edge cases and negative scenarios
+   # Add more tests to cover edge cases and negative scenarios 
 
   
    ```
