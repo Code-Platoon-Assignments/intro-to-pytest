@@ -11,9 +11,7 @@ In this exercise, you will practice using pytest to test a simple command-line c
 2. Inside the directory, create a Python file named `calculator.py` with the following code:
 
    ```python
-   
-   import sys
-   def calculate(num1, num2, operation):
+      def calculate(num1, num2, operation):
        result = 0
        if operation == "add":
            result = num1 + num2
@@ -28,16 +26,6 @@ In this exercise, you will practice using pytest to test a simple command-line c
                raise ValueError("Cannot divide by zero")
        print(f"Result: {result}")
        return result
-   
-   if __name__ == "__main__":
-       if len(sys.argv) != 4:
-           print("Usage: calculator.py <num1> <num2> <operation>")
-           sys.exit(1)
-       num1 = float(sys.argv[1])
-       num2 = float(sys.argv[2])
-       operation = sys.argv[3]
-       result = calculate(num1, num2, operation)
-       print(f"Result: {result}")
    ```
 
 3. Create a new Python file named `test_calculator.py` for writing test cases.
